@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Arnita Blog</title>
+    <style>
+        body {
+            background-color: #f5f5f5; /* Light Gray */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #f8a5c2; /* Soft Pink */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #c8d6e5; /* Soft Blue */
+            padding: 10px;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+        nav ul li a {
+            color: #333; /* Dark Gray */
+            text-decoration: none;
+        }
+        .content {
+            margin: 20px;
+            background-color: #fff; /* White */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        }
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+        }
+        footer {
+            background-color: #f8a5c2; /* Soft Pink */
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Arnita Blog</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Posts</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h2>Categories</h2>
+        <ul>
+            {% for category in categories %}
+                <li>{{ category.category }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Pages</h2>
+        <ul>
+            {% for page in pages %}
+                <li><a href="{% url 'page_detail' page.slug %}">{{ page.title }}</a></li>
+            {% endfor %}
+        </ul>
+
+        <h2>Posts</h2>
+        <ul>
+            {% for post in posts %}
+                <li><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></li>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <footer>
+        &copy; 2024 Arnita Blog
+    </footer>
+</body>
+</html>
